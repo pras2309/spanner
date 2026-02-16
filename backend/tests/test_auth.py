@@ -1,9 +1,9 @@
 import pytest
-from backend.app.models import User, Role, Permission
-from backend.app.utils.security import hash_password
-from backend.app.middleware.rbac import require_permission
+from app.models import User, Role, Permission
+from app.utils.security import hash_password
+from app.middleware.rbac import require_permission
 from fastapi import APIRouter, Depends
-from backend.app.main import app
+from app.main import app
 
 # Create a temporary router for testing RBAC
 rbac_test_router = APIRouter()
