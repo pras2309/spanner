@@ -7,6 +7,13 @@ export interface User {
   created_at: string;
 }
 
+export interface UserBrief {
+  id: string;
+  name: string;
+  email: string;
+  roles: string[];
+}
+
 export interface Role {
   id: number;
   name: string;
@@ -27,7 +34,22 @@ export interface Segment {
   status: 'active' | 'archived';
   created_by: string;
   created_at: string;
-  offerings?: Offering[];
+  updated_at: string;
+  offerings: Offering[];
+}
+
+export interface SegmentCreate {
+  name: string;
+  description?: string;
+  offering_ids?: string[];
+  new_offerings?: { name: string; description?: string }[];
+}
+
+export interface SegmentUpdate {
+  name?: string;
+  description?: string;
+  offering_ids?: string[];
+  new_offerings?: { name: string; description?: string }[];
 }
 
 export interface Offering {
@@ -35,7 +57,22 @@ export interface Offering {
   name: string;
   description: string;
   status: 'active' | 'inactive';
+}
+
+export interface Assignment {
+  id: string;
+  entity_type: string;
+  entity_id: string;
+  assigned_to: UserBrief;
+  assigned_by: UserBrief;
+  is_active: boolean;
   created_at: string;
+}
+
+export interface AssignmentCreate {
+  entity_type: string;
+  entity_id: string;
+  assigned_to: string;
 }
 
 export interface Company {

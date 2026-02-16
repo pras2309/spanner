@@ -5,7 +5,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from ..database import get_db
 
-def require_permission(module: str, action: str):
+def require_permission(module: str, action: str = None):
+    if action is None and ":" in module:
+        module, action = module.split(":", 1)
+
     async def permission_checker(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
         # Join User -> user_roles -> Role -> role_permissions -> Permission
         query = (
